@@ -1,0 +1,23 @@
+<div class="post">
+  Тут у нас интересный пост
+</div>
+<div class="comment">
+  <ng-container *ngIf="(comments$ | async) as comments">
+    <div *ngFor="let comment of comments" class="comment-item">
+      <h3>{{comment?.authorName}}(Id: {{comment?.id}})</h3>
+      <div>{{comment?.dateTime | date }}</div>
+      <div>Ответ: {{comment?.parentId ?? 'посту'}}</div>
+      <div>{{comment?.body}}</div>
+      <button class="comment-btn" (click)="onAnswerComment(comment?.id, comments?.length)">Ответить</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isFormVisible">
+    <form id="form" class="comment-form" [formGroup]="createCommentForm" novalidate>
+      <div class="comment-form-item">
+        <label for="message">Ответ на комментарий:</label>
+        <textarea id="message" formControlName="message" class="comment-form-input"></textarea>
+      </div>
+      <button class="comment-form-btn" (click)="onSubmit()">Отправить</button>
+    </form>
+  </ng-container>
+</div>

@@ -1,0 +1,3 @@
+<button class="btn" (click)="changeFlag()">Показать другое задание</button>
+<app-layout *ngIf="ifFlag"></app-layout>
+<app-comments *ngIf="!ifFlag"></app-comments>
